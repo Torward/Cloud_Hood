@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" styleClass="parent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.lomov.cloudhood.client.MainController">
+<AnchorPane fx:id="dragAndDropPane" layoutX="200.0" layoutY="62.0" onDragDropped="#dropped" onDragOver="#sendDAnaD" onMouseEntered="#hover" onMouseExited="#objectFree" onMousePressed="#fileChooseM" prefHeight="470.0" prefWidth="200.0" styleClass="drag-pane" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="624.0">
+    <children>
+        <Label fx:id="text" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="8.0" layoutY="150.0" onMouseEntered="#hover" onMouseExited="#objectFree" prefHeight="200.0" prefWidth="200.0" text="+" textAlignment="CENTER" textFill="#4b78bb" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+            <font>
+                <Font size="96.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
+<Button fx:id="download_btn" layoutY="401.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#chooseToUpload" onMouseEntered="#hoverDownloadBTN" onMouseExited="#BTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ЗАГРУЗИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="401.0">
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor></Button>
+<Button fx:id="upload_btn" layoutY="433.0" mnemonicParsing="false" onAction="#fileChoose" onMouseEntered="#hoverSendBTN" onMouseExited="#sendBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ОТПРАВИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0">
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor></Button>
+   <Button fx:id="delete_btn" layoutY="518.0" mnemonicParsing="false" onAction="#delete" onMouseEntered="#hoverDeleteBTN" onMouseExited="#deleteBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="УДАЛИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <Button fx:id="share_btn" layoutY="475.0" mnemonicParsing="false" onAction="#share" onMouseEntered="#hoverShareBTN" onMouseExited="#shareBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ПОДЕЛИТЬСЯ" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+<TextArea fx:id="log_area" editable="false" layoutX="824.0" prefHeight="35.0" prefWidth="819.0" styleClass="text-area" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="560.0">
+    <font>
+        <Font name="Arial" size="12.0" />
+    </font></TextArea>
+<ImageView fitHeight="48.0" fitWidth="152.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="565.0574722290039" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="472.0" AnchorPane.topAnchor="12.0">
+    <image>
+        <Image url="@img/logo.png" />
+    </image>
+</ImageView>
+<AnchorPane fx:id="person" layoutX="14.0" prefHeight="300.0" prefWidth="180.0" styleClass="person" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
+    <children>
+        <ImageView fx:id="ava" fitHeight="99.0" fitWidth="94.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true" styleClass="ava" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0">
+            <image>
+                <Image url="@img/ava.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="nickname" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="120.0" prefHeight="17.0" prefWidth="100.0" text="Петрович" textFill="#4b78bb" underline="true" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="120.0">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+        <Label layoutX="14.0" layoutY="120.0" text="Имя: " textFill="#4b78bb" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="120.0" />
+        <Label layoutX="15.0" layoutY="151.0" text="Лимит: " textFill="#4b78bb" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="153.0">
+            <font>
+                <Font name="Algerian" size="12.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" layoutX="67.0" layoutY="151.0" prefHeight="17.0" prefWidth="85.0" text="1 Гб" textFill="#4b78bb" underline="true" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="153.0" />
+        <Label layoutX="14.0" layoutY="186.0" text="Использовано: " textFill="#4b78bb" AnchorPane.leftAnchor="14.0" />
+        <Label layoutX="117.0" layoutY="186.0" text="500 Мб" textFill="#4b78bb" underline="true" AnchorPane.rightAnchor="28.0" />
+    </children>
+</AnchorPane>
+<AnchorPane layoutX="635.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="375.0" styleClass="search-bar" stylesheets="@style.css" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="12.0">
+    <children>
+        <TextField prefHeight="25.0" prefWidth="200.0" promptText="Найти..." styleClass="transparent" stylesheets="@style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
+        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.5">
+            <image>
+                <Image url="@img/glassSearch.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
+<AnchorPane layoutX="412.0" layoutY="85.0" prefHeight="470.0" prefWidth="606.0">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                    <content>
+                        <GridPane fx:id="serverPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="468.0" prefWidth="604.0" styleClass="server-pane">
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                            </rowConstraints>
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        </GridPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+
+</AnchorPane>

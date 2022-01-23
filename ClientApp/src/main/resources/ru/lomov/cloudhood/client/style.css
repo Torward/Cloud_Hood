@@ -1,0 +1,45 @@
+.parent{
+    -fx-background-color: rgba(255, 255, 255, 0.57);
+    -fx-background-radius: 30px;
+}
+.button{
+    -fx-background-color: #4b78bb;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 120, 187, 0.8), 10, 0, 0, 0);
+    -fx-background-radius: 0px 5px 5px 0px;
+}
+.text-area{
+-fx-font-color: rgba(19, 40, 206, 1);
+}
+.drag-pane{
+-fx-background-color: rgba(255, 255, 255, 0.8);
+}
+//.tile{
+    -fx-background-radius: 0px 5px 5px 0px;
+    -fx-background-color: rgba(255, 255, 255, 1);
+    -fx-border-color: rgba(75, 120, 187, 1)
+}
+.ava{
+    -fx-border-color: rgba(75, 120, 187, 1);
+}
+.server-pane{
+    -fx-border-color: rgba(75, 120, 187, 1);
+    -fx-background-color: rgba(255, 255, 255, 1);
+}
+
+.text{
+-fx-font-color: rgba(75, 120, 187, 1);
+}
+.person{
+    -fx-border-radius: 0px 0px 5px 5px;
+     -fx-border-color: rgba(75,120,187,1);
+}
+.white-background{
+    -fx-background-color: #fff;
+}
+.search-bar{
+       -fx-border-color: #4b78bb;
+       -fx-border-width: 3;
+}
+.transparent{
+       -fx-background-color: rgba(0,0,0,0);
+}
