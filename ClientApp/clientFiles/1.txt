@@ -1,0 +1,153 @@
+17 Progress Bar and Progress Indicator
+In this chapter, you learn about the progress indicator and progress bar, the UI controls that visualize progress of any operations in your JavaFX applications.
+
+The ProgressIndicator class and its direct subclass ProgressBar provide the capabilities to indicate that a particular task is processing and to detect how much of this work has been already done. While the ProgressBar class visualizes the progress as a completion bar, the ProgressIndicator class visualizes the progress in the form of a dynamically changing pie chart, as shown in Figure 17-1.
+
+Figure 17-1 Progress Bar and Progress Indicator
+
+Progress bar and progress indicator.
+Description of "Figure 17-1 Progress Bar and Progress Indicator"
+
+Creating Progress Controls
+Use the code fragment in Example 17-1 to insert the progress controls in your JavaFX application.
+
+Example 17-1 Implementing the Progress Bar and Progress Indicator
+
+ProgressBar pb = new ProgressBar(0.6);
+ProgressIndicator pi = new ProgressIndicator(0.6);
+You can also create the progress controls without parameters by using an empty constructor. In that case, you can assign the value by using the setProgress method.
+
+Sometimes an application cannot determine the full completion time of a task. In that case, progress controls remain in indeterminate mode until the length of the task is determined. Figure 17-2 shows different states of the progress controls depending on their progress variable value.
+
+Figure 17-2 Various States of Progress Controls
+
+Progress bars and progress indicators in different states.
+Description of "Figure 17-2 Various States of Progress Controls"
+
+Example 17-2 shows the source code of the application shown in Figure 17-2.
+
+Example 17-2 Enabling Different States of Progress Controls
+
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Main  extends Application {
+
+final Float[] values = new Float[] {-1.0f, 0f, 0.6f, 1.0f};
+final Label [] labels = new Label[values.length];
+final ProgressBar[] pbs = new ProgressBar[values.length];
+final ProgressIndicator[] pins = new ProgressIndicator[values.length];
+final HBox hbs [] = new HBox [values.length];
+
+    @Override
+    public void start(Stage stage) {
+        Group root = new Group();
+        Scene scene = new Scene(root, 300, 150);
+        scene.getStylesheets().add("progresssample/Style.css");
+        stage.setScene(scene);
+        stage.setTitle("Progress Controls");
+
+
+        for (int i = 0; i < values.length; i++) {
+            final Label label = labels[i] = new Label();
+            label.setText("progress:" + values[i]);
+
+            final ProgressBar pb = pbs[i] = new ProgressBar();
+            pb.setProgress(values[i]);
+
+            final ProgressIndicator pin = pins[i] = new ProgressIndicator();
+            pin.setProgress(values[i]);
+            final HBox hb = hbs[i] = new HBox();
+            hb.setSpacing(5);
+            hb.setAlignment(Pos.CENTER);
+            hb.getChildren().addAll(label, pb, pin);
+        }
+
+        final VBox vb = new VBox();
+        vb.setSpacing(5);
+        vb.getChildren().addAll(hbs);
+        scene.setRoot(vb);
+        stage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+A positive value of the progress variable between 0 and 1 indicates the percentage of progress. For example, 0.4 corresponds to 40%. A negative value for this variable indicates that the progress is in the indeterminate mode. Use the isIndeterminate method to check whether the progress control is in the indeterminate mode.
+
+Indicating Progress in Your User Interface
+Example 17-2 was initially simplified to render all the possible states of the progress controls. In real-world applications, the progress value can be obtained through the value of other UI elements.
+
+Study the code in Example 17-3 to learn how set values for the progress bar and progress indicator based on the slider position.
+
+Example 17-3 Receiving the Progress Value from a Slider
+
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+public class Main  extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Group root = new Group();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Progress Controls");
+
+        final Slider slider = new Slider();
+        slider.setMin(0);
+        slider.setMax(50);
+
+        final ProgressBar pb = new ProgressBar(0);
+        final ProgressIndicator pi = new ProgressIndicator(0);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                Number old_val, Number new_val) {
+                pb.setProgress(new_val.doubleValue()/50);
+                pi.setProgress(new_val.doubleValue()/50);
+            }
+        });
+
+        final HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(slider, pb, pi);
+        scene.setRoot(hb);
+        stage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+When you compile and run this application, it produces the window shown in Figure 17-3.
+
+Figure 17-3 Indicating the Progress Set by a Slider
+
+A slider, a progress bar , and a progress indicatior.
+Description of "Figure 17-3 Indicating the Progress Set by a Slider"
+
+An ChangeListener object determines if the slider's value is changed and computes the progress for the progress bar and progress indicator so that the values of the progress controls are in the range of 0.0 to 1.0.
+
+Related API Documentation.
+
+ProgressBar
+
+ProgressIndicator

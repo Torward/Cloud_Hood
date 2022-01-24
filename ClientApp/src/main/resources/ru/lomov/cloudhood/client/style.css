@@ -13,6 +13,9 @@
 .drag-pane{
 -fx-background-color: rgba(255, 255, 255, 0.8);
 }
+.log-field{
+    -fx-background-color: rgba(255, 255, 255, 1);
+}
 //.tile{
     -fx-background-radius: 0px 5px 5px 0px;
     -fx-background-color: rgba(255, 255, 255, 1);
@@ -32,13 +35,15 @@
 .person{
     -fx-border-radius: 0px 0px 5px 5px;
      -fx-border-color: rgba(75,120,187,1);
+     -fx-border-width: 2px;
 }
 .white-background{
     -fx-background-color: #fff;
 }
 .search-bar{
-       -fx-border-color: #4b78bb;
-       -fx-border-width: 3;
+        -fx-border-radius: 0px 0px 5px 5px;
+        -fx-border-color: #4b78bb;
+        -fx-border-width: 2px;
 }
 .transparent{
        -fx-background-color: rgba(0,0,0,0);
