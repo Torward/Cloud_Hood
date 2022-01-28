@@ -17,20 +17,20 @@
         </Label>
     </children>
 </AnchorPane>
-<Button fx:id="download_btn" layoutY="401.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#chooseToUpload" onMouseEntered="#hoverDownloadBTN" onMouseExited="#BTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ЗАГРУЗИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="401.0">
+<Button fx:id="download_btn" layoutY="401.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#chooseToUpload"  prefHeight="30.0" prefWidth="100.0" text="ЗАГРУЗИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="401.0">
     <cursor>
         <Cursor fx:constant="HAND" />
     </cursor></Button>
-<Button fx:id="upload_btn" layoutY="433.0" mnemonicParsing="false" onAction="#fileChoose" onMouseEntered="#hoverSendBTN" onMouseExited="#sendBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ОТПРАВИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0">
+<Button fx:id="upload_btn" layoutY="433.0" mnemonicParsing="false" onAction="#fileChoose"  prefHeight="30.0" prefWidth="100.0" text="ОТПРАВИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0">
     <cursor>
         <Cursor fx:constant="HAND" />
     </cursor></Button>
-   <Button fx:id="delete_btn" layoutY="518.0" mnemonicParsing="false" onAction="#delete" onMouseEntered="#hoverDeleteBTN" onMouseExited="#deleteBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="УДАЛИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0">
+   <Button fx:id="delete_btn" layoutY="518.0" mnemonicParsing="false" onAction="#delete"  prefHeight="30.0" prefWidth="100.0" text="УДАЛИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Button fx:id="share_btn" layoutY="475.0" mnemonicParsing="false" onAction="#share" onMouseEntered="#hoverShareBTN" onMouseExited="#shareBTNFree" prefHeight="30.0" prefWidth="100.0" styleClass="button_send" text="ПОДЕЛИТЬСЯ" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0">
+   <Button fx:id="share_btn" layoutY="475.0" mnemonicParsing="false" onAction="#share"   prefHeight="30.0" prefWidth="100.0" text="ПОДЕЛИТЬСЯ" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
@@ -66,7 +66,7 @@
         <Label layoutX="117.0" layoutY="186.0" text="500 Мб" textFill="#4b78bb" underline="true" AnchorPane.rightAnchor="28.0" />
     </children>
 </AnchorPane>
-<AnchorPane layoutX="643.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="375.0" styleClass="search-bar" stylesheets="@style.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+<AnchorPane layoutX="643.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="375.0" styleClass="search-bar" stylesheets="@style.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="23.0">
     <children>
         <TextField prefHeight="25.0" prefWidth="200.0" promptText="Найти..." styleClass="transparent" stylesheets="@style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.5">
