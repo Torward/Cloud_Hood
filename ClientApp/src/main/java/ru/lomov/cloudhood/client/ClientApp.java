@@ -17,6 +17,7 @@ public class ClientApp extends Application {
         stage.getIcons().add(
                 new Image(
                         ClientApp.class.getResourceAsStream("/ru/lomov/cloudhood/client/img/Icon.png")));
+        stage.setResizable(false);
         stage.show();
     }
 }
