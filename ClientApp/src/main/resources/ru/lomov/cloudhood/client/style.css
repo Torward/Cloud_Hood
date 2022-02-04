@@ -1,50 +1,162 @@
-.parent{
-    -fx-background-color: rgba(255, 255, 255, 0.57);
-    -fx-background-radius: 30px;
-}
-.button{
+.root {
     -fx-background-color: #4b78bb;
+}
+
+.button {
+    -fx-background-color: #4b78bb;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffffff65;
+    -fx-border-radius: 0px 5px 5px 0px;
     -fx-effect: dropshadow(three-pass-box, rgba(75, 120, 187, 0.8), 10, 0, 0, 0);
     -fx-background-radius: 0px 5px 5px 0px;
 }
-.text-area{
--fx-font-color: rgba(19, 40, 206, 1);
+
+.button:hover {
+    -fx-background-color: #ffffff65;
+    -fx-text-fill: black;
+
 }
-.drag-pane{
--fx-background-color: rgba(255, 255, 255, 0.8);
+
+.button-reload {
+    -fx-background-color: #4b78bb;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 120, 187, 0.8), 10, 0, 0, 0);
+    -fx-background-radius: 25px 25px 25px 25px;
 }
-.log-field{
-    -fx-background-color: rgba(255, 255, 255, 1);
+
+.text-area {
+    -fx-font-color: rgba(19, 40, 206, 1);
 }
-//.tile{
-    -fx-background-radius: 0px 5px 5px 0px;
-    -fx-background-color: rgba(255, 255, 255, 1);
-    -fx-border-color: rgba(75, 120, 187, 1)
+
+.label-drag {}
+
+.drag-pane {
+    -fx-background-color: #4b78bb;
 }
-.ava{
-    -fx-border-color: rgba(75, 120, 187, 1);
+
+.log-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #4b78bb;
+    -fx-border-width: 0px 0px 1px 0px;
 }
-.server-pane{
+
+.table-view {
+    -fx-background-color: rgba(75, 120, 187, 1);
+    -fx-background-radius: 25px 25px 0px 0px;
+
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #4b78bb;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0 0 10 0;
+    -fx-padding: 0 0 10 0;
+    -fx-border-radius: 10;
+    -fx-border-color: #ffffff65;
+    -fx-border-width: 2px;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom, #93f9b944, #4b78bb44);
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to right, #93f9b944, #4b78bb44);
+}
+
+
+.table-view .column-header {
+    -fx-size: 40;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: #4b78bb;
+    -fx-background-color: transparent;
+}
+
+.table-view .filler {
+    -fx-size: 40;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: #4b78bb;
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #4b78bb44;
+    -fx-text-background-color: rgb(255, 255, 255);
+}
+
+.table-row-cell:even {
+    -fx-background-color: #93f9b810;
+    -fx-text-background-color: rgb(255, 255, 255);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #ffffff65;
+    -fx-text-background-color: black;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #ffffff65;
+    -fx-text-background-color: black;
+}
+
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.ava {
+    -fx-border-color: #ffffff65;
+}
+
+.server-pane {
     -fx-border-color: rgba(75, 120, 187, 1);
     -fx-background-color: rgba(255, 255, 255, 1);
 }
 
-.text{
--fx-font-color: rgba(75, 120, 187, 1);
+.text {
+    -fx-font-color: #ffffff65;
 }
-.person{
+
+.person {
     -fx-border-radius: 0px 0px 5px 5px;
-     -fx-border-color: rgba(75,120,187,1);
-     -fx-border-width: 2px;
+    -fx-border-color: #ffffff65;
+    -fx-border-width: 2px;
+
 }
-.white-background{
+
+.white-background {
     -fx-background-color: #fff;
 }
-.search-bar{
-        -fx-border-radius: 0px 0px 5px 5px;
-        -fx-border-color: #4b78bb;
-        -fx-border-width: 2px;
+
+.search-bar {
+    -fx-border-color: #AEAEAE;
+    -fx-border-width: 0px 0px 1px 0px;
 }
-.transparent{
-       -fx-background-color: rgba(0,0,0,0);
+
+.search-bar:hover {
+    -fx-border-color: black;
+}
+
+.transparent {
+    -fx-background-color: rgba(0, 0, 0, 0);
 }
