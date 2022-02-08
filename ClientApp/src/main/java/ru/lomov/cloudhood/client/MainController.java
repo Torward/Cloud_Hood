@@ -59,7 +59,7 @@ public class MainController implements Initializable {
     private Label nickname;
 
 
-    private final Network network = new Network();
+    private ClientNetworkNetty network;
     private Socket socket;
 
     private static final String DELETE = "delete";
@@ -73,11 +73,12 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nickname.setUnderline(true);
         nickname.setText("Егорыч");
-        network.connect();
-        socket = network.getSocket();
+        network = new ClientNetworkNetty();
+        //      socket = network.getSocket();
         name.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("name"));
         size.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("size"));
         date.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("date"));
+
         reload();
     }
 
@@ -87,11 +88,9 @@ public class MainController implements Initializable {
         List<File> files = dragEvent.getDragboard().getFiles();
         File fileToSend = files.get(0);
         if (fileToSend != null) {
-            try {
-                network.sendFile(fileToSend);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            network.sendMessage(fileToSend);
+
             files = Collections.singletonList(fileToSend);
             printLog(log_area, files);
         }
@@ -110,11 +109,9 @@ public class MainController implements Initializable {
         fileChooser.setInitialDirectory(new File("C:\\Users\\Gorlum\\Desktop\\Cloud Hood App\\ClientApp\\clientFiles"));
         File fileToSend = fileChooser.showOpenDialog(secondaryStage);
         if (fileToSend != null) {
-            try {
-                network.sendFile(fileToSend);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            network.sendMessage(fileToSend);
+
             List<File> files = Collections.singletonList(fileToSend);
             printLog(log_area, files);
         }
@@ -127,37 +124,41 @@ public class MainController implements Initializable {
         fileChooser.setInitialDirectory(new File("C:\\Users\\Gorlum\\Desktop\\Cloud Hood App\\ClientApp\\clientFiles"));
         File fileToSend = fileChooser.showOpenDialog(secondaryStage);
         if (fileToSend != null) {
-            try {
-                network.sendFile(fileToSend);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            network.sendMessage(fileToSend);
+
             List<File> files = Collections.singletonList(fileToSend);
             printLog(log_area, files);
         }
     }
 
     public void share(ActionEvent actionEvent) {
-        try {
-            network.sendTextMsg(SHARE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            network.sendTextMsg(SHARE);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void delete(ActionEvent actionEvent) {
-        try {
-            network.sendTextMsg(DELETE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            network.sendTextMsg(DELETE);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void download() throws IOException {
         String fileName = serverView.getSelectionModel().getSelectedItem().getName();
-        network.receiveMsg(fileName, log_area);
+        network.getMessage(fileName, log_area);
     }
 
+    public void reload() {
+        network.refreshFileList();
+        list = FXCollections.observableArrayList(network.getList());
+        System.out.println("Element in collection: " + list.size());
+        serverView.setItems(list);
+        serverView.comparatorProperty();
+    }
     //--------------------------------------------------------------------------
     //graphics
 
@@ -193,15 +194,5 @@ public class MainController implements Initializable {
         textArea.appendText(log + "\n");
     }
 
-    public void reload() {
-        try {
-            list = FXCollections.observableArrayList(network.reload());
-            System.out.println("Element in collection: " + list.size());
 
-            serverView.setItems(list);
-            serverView.comparatorProperty();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

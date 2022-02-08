@@ -98,6 +98,14 @@
     -fx-text-background-color: rgb(255, 255, 255);
 }
 
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:hover:empty {
+    -fx-background-color: transparent;
+}
+
 .table-row-cell:hover {
     -fx-background-color: #ffffff65;
     -fx-text-background-color: black;
