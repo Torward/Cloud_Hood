@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FirstInboundHandler extends ChannelInboundHandlerAdapter {
+public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
     private Signal signalType = Signal.VOID;
     private int limiter = -1;
     private int condition = -1;

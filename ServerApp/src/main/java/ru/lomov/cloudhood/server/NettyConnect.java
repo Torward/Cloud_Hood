@@ -20,7 +20,7 @@ public class NettyConnect {
                     .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new FirstInboundHandler(), new ServerOutBoundHandler());
+                            ch.pipeline().addLast(new FirstServerInboundHandler(), new ServerOutBoundHandler());
                         }
                     });
             System.out.println("Сервер запущен..");

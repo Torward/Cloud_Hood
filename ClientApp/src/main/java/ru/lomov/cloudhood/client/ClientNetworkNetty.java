@@ -9,7 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextArea;
 
 import java.io.*;
 
@@ -38,7 +37,7 @@ public class ClientNetworkNetty {
                             @Override
                             protected void initChannel(SocketChannel socketChannel) throws Exception {
                                 channel = socketChannel;
-                                socketChannel.pipeline().addLast(new OutBoundHandler(), new FirstClientInboundHandler());
+                                socketChannel.pipeline().addLast(new ClientOutBoundHandler(), new FirstClientInboundHandler());
 
                             }
                         });
@@ -63,7 +62,7 @@ public class ClientNetworkNetty {
         channel.writeAndFlush(file);
     }
 
-    public void getMessage(String fileName, TextArea textArea) {
+    public void getFile(String fileName) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -80,6 +79,15 @@ public class ClientNetworkNetty {
         }
         channel.writeAndFlush(Signal.GET_FILE_LIST);
 
+    }
+
+    public void deleteFile(String fileName){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        channel.writeAndFlush(fileName);
     }
 
     public ObservableList<FileInfo> getList() {

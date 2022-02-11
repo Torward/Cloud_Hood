@@ -140,16 +140,14 @@ public class MainController implements Initializable {
     }
 
     public void delete(ActionEvent actionEvent) {
-//        try {
-//            network.sendTextMsg(DELETE);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        String fileName = serverView.getSelectionModel().getSelectedItem().getName();
+        network.deleteFile(fileName);
+
     }
 
     public void download() throws IOException {
         String fileName = serverView.getSelectionModel().getSelectedItem().getName();
-        network.getMessage(fileName, log_area);
+        network.getFile(fileName);
     }
 
     public void reload() {

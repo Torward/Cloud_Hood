@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 
-public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
+public class ClientOutBoundHandler extends ChannelOutboundHandlerAdapter {
 
     private int limiter = -1;
     private int condition = -1;
@@ -23,6 +23,7 @@ public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (msg instanceof String fileName) {
+
             buf = ByteBufAllocator.DEFAULT.directBuffer(1);
             buf.writeByte((byte) 16);
             ctx.write(buf);
@@ -39,9 +40,9 @@ public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
             ctx.write(buf);
             System.out.println("Отправлено имя файла: " + fileName);
 
-            System.out.println("Имя файла отправлен.");
             ctx.flush();
             buf.release();
+            System.out.println("Передача окончена.");
         }
         if (msg instanceof Signal) {
             if (msg.equals(Signal.GET_FILE_LIST)) {

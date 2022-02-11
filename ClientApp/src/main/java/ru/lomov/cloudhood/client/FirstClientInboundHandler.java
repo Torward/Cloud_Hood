@@ -95,12 +95,13 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
                 return;
             }
             try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(rootDir + "/" + fileName))) {
-                while (buf.readableBytes()>0){
+                while (buf.readableBytes()> -1){
                     out.write(buf.readByte());
                 }
-                System.out.println("Файл записан.");
+            //    System.out.println("Файл записан.");
             } catch (IOException e) {
                 e.printStackTrace();
+                buf.release();
             }
         }
         if (buf.readableBytes() == 0) {
@@ -144,8 +145,7 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
             buffer.readBytes(modifiedDateInBytes);
             fileDateOfList = new String(modifiedDateInBytes);
             System.out.println("Получена дата изменения: " + fileDateOfList);
-
-            if (fileSizeInByte <= 0) {
+            if (fileSizeInByte == 0) {
                 fileSizeOfList = "папка";
             } else if (fileSizeInByte < (1024)) {
                 fileSizeOfList = fileSizeInByte + " B";

@@ -42,7 +42,8 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
         Path getFile = path.resolve(fileReseivedName);
         File file = getFile.toFile();
 
-        FileRegion region = new DefaultFileRegion(new FileInputStream(getFile.toFile()).getChannel(), 0, getFile.toFile().length());
+        FileRegion region = new DefaultFileRegion(
+                new FileInputStream(getFile.toFile()).getChannel(), 0, getFile.toFile().length());
 
         buf = ByteBufAllocator.DEFAULT.directBuffer(1);
         buf.writeByte((byte) 16);
@@ -67,6 +68,7 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
 
         ctx.write(region);
         ctx.flush();
+
         System.out.println("Файл отправлен.");
         buf.release();
     }
