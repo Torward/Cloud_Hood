@@ -62,6 +62,10 @@ public class ClientNetworkNetty {
         channel.writeAndFlush(file);
     }
 
+    /*
+    * Метод скачивания файла с сервера
+    * Отправляем ClientOutBoundHandler имя файла который хотим скачать.
+    * */
     public void getFile(String fileName) {
         try {
             Thread.sleep(1000);

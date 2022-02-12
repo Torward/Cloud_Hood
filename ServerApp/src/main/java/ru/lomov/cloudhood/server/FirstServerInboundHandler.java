@@ -55,6 +55,10 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
+    /*
+    * Метод вычитывает атрибуты файла
+    * и отправляет имя файла методу ServerOutBoundHandler
+    * */
     private void sendToClient(ByteBuf buffer, ChannelHandlerContext ctx) {
         int fileNameSize = buffer.readInt();
         byte[] nameInBytes = new byte[fileNameSize];
