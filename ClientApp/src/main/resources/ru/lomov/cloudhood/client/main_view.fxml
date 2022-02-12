@@ -49,12 +49,12 @@
             </Button>
             <AnchorPane fx:id="contentPane" layoutX="20.0" layoutY="-100.0" prefHeight="480.0" prefWidth="480.0" styleClass="content-pane" AnchorPane.bottomAnchor="-40.0" AnchorPane.topAnchor="-40.0">
                <children>
-                  <Label layoutX="98.0" layoutY="202.0" prefHeight="77.0" prefWidth="282.0" text="CLOUD HOOD" underline="true" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="202.0">
+                  <Label layoutX="98.0" layoutY="202.0" prefHeight="77.0" prefWidth="282.0" text="CLOUD HOOD" underline="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
                      <font>
                         <Font name="Agency FB Bold" size="64.0" />
                      </font>
                   </Label>
-                  <Button fx:id="signUpFormBTNFromLogo" layoutX="180.0" layoutY="339.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSignUpForm" prefHeight="32.0" prefWidth="120.0" styleClass="button-auth" text="РЕГИСТРАЦИЯ">
+                  <Button fx:id="signUpFormBTNFromLogo" layoutX="180.0" layoutY="339.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSignUpForm" prefHeight="32.0" prefWidth="120.0" styleClass="button-auth" text="РЕГИСТРАЦИЯ" AnchorPane.topAnchor="300.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

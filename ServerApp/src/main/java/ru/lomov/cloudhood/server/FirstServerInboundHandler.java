@@ -61,8 +61,6 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
         buffer.readBytes(nameInBytes);
         String fileToClientName = new String(nameInBytes);
         ctx.channel().writeAndFlush(fileToClientName);
-
-
     }
 
     public void writeToCloud(ByteBuf buf) {

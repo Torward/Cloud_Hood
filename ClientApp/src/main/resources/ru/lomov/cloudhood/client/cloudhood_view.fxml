@@ -98,9 +98,9 @@
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <Label layoutX="5.0" layoutY="563.0" text="CLOUD HOOD" AnchorPane.topAnchor="563.0">
+         <Label layoutX="5.0" layoutY="563.0" text="CLOUD HOOD" underline="true" AnchorPane.topAnchor="563.0">
             <font>
-               <Font name="Cambria Bold" size="18.0" />
+               <Font name="Agency FB Bold" size="24.0" />
             </font>
          </Label>
       </children>

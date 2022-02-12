@@ -95,7 +95,7 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
                 return;
             }
             try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(rootDir + "/" + fileName))) {
-                while (buf.readableBytes()> -1){
+                while (buf.readableBytes() > longLimiter){
                     out.write(buf.readByte());
                 }
             //    System.out.println("Файл записан.");

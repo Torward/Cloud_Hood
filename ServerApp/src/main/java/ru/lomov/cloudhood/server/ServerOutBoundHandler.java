@@ -7,8 +7,10 @@ import io.netty.channel.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -37,13 +39,13 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
         }
     }
 
-    private void sendFileToClient(String fileReseivedName, ChannelHandlerContext ctx) throws FileNotFoundException {
+    private void sendFileToClient(String fileReseivedName, ChannelHandlerContext ctx) throws IOException {
         System.out.println("Получено имя файла " + fileReseivedName);
         Path getFile = path.resolve(fileReseivedName);
         File file = getFile.toFile();
 
         FileRegion region = new DefaultFileRegion(
-                new FileInputStream(getFile.toFile()).getChannel(), 0, getFile.toFile().length());
+                new FileInputStream(getFile.toFile()).getChannel(), 0, Files.size(getFile));
 
         buf = ByteBufAllocator.DEFAULT.directBuffer(1);
         buf.writeByte((byte) 16);
@@ -63,7 +65,7 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
 
         buf = ByteBufAllocator.DEFAULT.directBuffer(8);
         buf.writeLong(file.length());
-        ctx.writeAndFlush(buf);
+        ctx.write(buf);
         System.out.println("Отправлен длинна файла: " + file.length());
 
         ctx.write(region);
