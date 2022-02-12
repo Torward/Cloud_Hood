@@ -22,6 +22,11 @@ public class ClientOutBoundHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+        /*
+        * Отправляем серверу команду и набор атрибутов файла
+        * Посылку получит FirstServerInboundHandler
+        * */
+
         if (msg instanceof String fileName) {
 
             buf = ByteBufAllocator.DEFAULT.directBuffer(1);

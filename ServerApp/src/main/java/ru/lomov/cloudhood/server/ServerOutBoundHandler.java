@@ -34,11 +34,16 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
                 refreshClientList(ctx, root, filesList);
             }
         }
-        if (msg instanceof String filename){
+        if (msg instanceof String filename) {
             sendFileToClient(filename, ctx);
         }
     }
 
+    /*
+     * Метод получает имя требуемого файла и контекст.
+     * Отправляет набор атрибутов файла и содержимое вычитанное через FileRegion
+     * Контекст сбрасывается в конце метода.
+     * */
     private void sendFileToClient(String fileReseivedName, ChannelHandlerContext ctx) throws IOException {
         System.out.println("Получено имя файла " + fileReseivedName);
         Path getFile = path.resolve(fileReseivedName);
