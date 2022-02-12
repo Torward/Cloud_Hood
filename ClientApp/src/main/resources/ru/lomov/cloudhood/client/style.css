@@ -1,4 +1,8 @@
-.root {
+.parent {
+    -fx-background-color: transparent;
+}
+
+.root-pane {
     -fx-background-color: #4b78bb;
 }
 
@@ -98,6 +102,14 @@
     -fx-text-background-color: rgb(255, 255, 255);
 }
 
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:hover:empty {
+    -fx-background-color: transparent;
+}
+
 .table-row-cell:hover {
     -fx-background-color: #ffffff65;
     -fx-text-background-color: black;
@@ -138,6 +150,7 @@
 }
 
 .person {
+    -fx-background-color: #4b78bb;
     -fx-border-radius: 0px 0px 5px 5px;
     -fx-border-color: #ffffff65;
     -fx-border-width: 2px;
@@ -160,3 +173,4 @@
 .transparent {
     -fx-background-color: rgba(0, 0, 0, 0);
 }
+

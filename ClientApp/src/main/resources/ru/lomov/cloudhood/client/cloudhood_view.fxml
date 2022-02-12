@@ -6,96 +6,104 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" styleClass="parent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.lomov.cloudhood.client.MainController">
-<AnchorPane fx:id="dragAndDropPane" layoutX="200.0" layoutY="85.0" onDragDropped="#dropped" onDragOver="#sendDAnaD" onMouseEntered="#hover" onMouseExited="#objectFree" onMousePressed="#fileChooseM" prefHeight="470.0" prefWidth="200.0" styleClass="drag-pane" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="624.0" AnchorPane.topAnchor="85.0">
-    <children>
-        <Label fx:id="text" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="20.0" layoutY="135.0" onMouseEntered="#hover" onMouseExited="#objectFree" prefHeight="200.0" prefWidth="200.0" text="+" textAlignment="CENTER" textFill="#ffffffaa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <font>
-                <Font size="96.0" />
-            </font>
-        </Label>
-    </children>
-</AnchorPane>
-<Button fx:id="download_btn" layoutY="401.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#download" prefHeight="30.0" prefWidth="120.0" text="ПОЛУЧИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="0.0">
-    <cursor>
-        <Cursor fx:constant="HAND" />
-    </cursor></Button>
-<Button fx:id="upload_btn" layoutY="433.0" mnemonicParsing="false" onAction="#fileChoose" prefHeight="30.0" prefWidth="120.0" text="ОТПРАВИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0">
-    <cursor>
-        <Cursor fx:constant="HAND" />
-    </cursor></Button>
-   <Button fx:id="delete_btn" layoutY="518.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="120.0" text="УДАЛИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </Button>
-   <Button fx:id="share_btn" layoutY="475.0" mnemonicParsing="false" onAction="#share" prefHeight="30.0" prefWidth="120.0" text="ПОДЕЛИТЬСЯ" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </Button>
-<TextArea fx:id="log_area" editable="false" layoutX="824.0" prefHeight="35.0" prefWidth="819.0" styleClass="log-field" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="560.0">
-    <font>
-        <Font name="Arial" size="12.0" />
-    </font></TextArea>
-<AnchorPane fx:id="person" layoutX="14.0" prefHeight="300.0" prefWidth="180.0" styleClass="person" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
-    <children>
-        <ImageView fx:id="ava" fitHeight="99.0" fitWidth="94.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true" styleClass="ava" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0">
-            <image>
-                <Image url="@img/ava.png" />
-            </image>
-        </ImageView>
-        <Label fx:id="nickname" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="120.0" prefHeight="17.0" prefWidth="100.0" styleClass="text" text="Петрович" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="120.0">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Label>
-        <Label layoutX="14.0" layoutY="120.0" text="Имя: " textFill="#ffffffaa" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="120.0" />
-        <Label layoutX="15.0" layoutY="151.0" text="Лимит: " textFill="#ffffffab" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="153.0">
-            <font>
-                <Font name="Algerian" size="12.0" />
-            </font>
-        </Label>
-        <Label alignment="CENTER_RIGHT" layoutX="67.0" layoutY="151.0" prefHeight="17.0" prefWidth="85.0" text="1 Гб" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="153.0" />
-        <Label layoutX="14.0" layoutY="186.0" text="Использовано: " textFill="#ffffffaa" AnchorPane.leftAnchor="14.0" />
-        <Label layoutX="117.0" layoutY="186.0" text="500 Мб" textFill="WHITE" underline="true" AnchorPane.rightAnchor="28.0" />
-    </children>
-</AnchorPane>
-<AnchorPane layoutX="643.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="375.0" styleClass="search-bar" stylesheets="@style.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="23.0">
-    <children>
-        <TextField prefHeight="25.0" prefWidth="200.0" promptText="Найти..." styleClass="transparent" stylesheets="@style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
-        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.5">
-            <image>
-                <Image url="@img/glassSearch.png" />
-            </image>
-        </ImageView>
-    </children>
-</AnchorPane>
-<AnchorPane layoutX="412.0" layoutY="85.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="414.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="85.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" styleClass="parent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.lomov.cloudhood.client.MainController">
+   <AnchorPane layoutX="38.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" styleClass="root-pane" stylesheets="@style.css">
       <children>
-         <TableView fx:id="serverView" prefHeight="467.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-           <columns>
-               <TableColumn prefWidth="10.0" />
-               <TableColumn fx:id="image" prefWidth="36.0" />
-               <TableColumn fx:id="name" prefWidth="323.0" text="Имя файла" />
-               <TableColumn fx:id="size" prefWidth="90.0" text="Размер" />
-               <TableColumn fx:id="date" prefWidth="133.0" text="Изменён" />
-               <TableColumn prefWidth="10.0" />
-           </columns>
-         </TableView>
+         <AnchorPane fx:id="dragAndDropPane" layoutX="200.0" layoutY="85.0" onDragDropped="#dropped" onDragOver="#sendDAnaD" onMouseEntered="#hover" onMouseExited="#objectFree" onMousePressed="#fileChooseM" prefHeight="470.0" prefWidth="200.0" styleClass="drag-pane" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="624.0" AnchorPane.topAnchor="85.0">
+            <children>
+               <Label fx:id="text" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="20.0" layoutY="135.0" onMouseEntered="#hover" onMouseExited="#objectFree" prefHeight="200.0" prefWidth="200.0" text="+" textAlignment="CENTER" textFill="#ffffffaa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <font>
+                     <Font size="96.0" />
+                  </font>
+               </Label>
+            </children>
+         </AnchorPane>
+         <Button fx:id="download_btn" layoutY="401.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#download" prefHeight="30.0" prefWidth="120.0" text="ПОЛУЧИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="-10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="upload_btn" layoutY="433.0" mnemonicParsing="false" onAction="#fileChoose" prefHeight="30.0" prefWidth="120.0" text="ОТПРАВИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="-10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="delete_btn" layoutY="518.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="120.0" text="УДАЛИТЬ" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="-10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="share_btn" layoutY="475.0" mnemonicParsing="false" onAction="#share" prefHeight="30.0" prefWidth="120.0" text="ПОДЕЛИТЬСЯ" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="-10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <TextArea fx:id="log_area" editable="false" layoutX="824.0" prefHeight="35.0" prefWidth="819.0" styleClass="log-field" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="560.0">
+            <font>
+               <Font name="Arial" size="12.0" />
+            </font>
+         </TextArea>
+         <AnchorPane fx:id="person" layoutX="5.0" layoutY="-20.0" prefHeight="300.0" prefWidth="180.0" styleClass="person" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="-10.0">
+            <children>
+               <ImageView fx:id="ava" fitHeight="99.0" fitWidth="94.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true" styleClass="ava" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0">
+                  <image>
+                     <Image url="@img/ava.png" />
+                  </image>
+               </ImageView>
+               <Label fx:id="nickname" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="120.0" prefHeight="17.0" prefWidth="100.0" styleClass="text" text="Петрович" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="120.0">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="14.0" layoutY="120.0" text="Имя: " textFill="#ffffffaa" AnchorPane.bottomAnchor="162.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="120.0" />
+               <Label layoutX="15.0" layoutY="151.0" text="Лимит: " textFill="#ffffffab" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="153.0">
+                  <font>
+                     <Font name="Algerian" size="12.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER_RIGHT" layoutX="67.0" layoutY="151.0" prefHeight="17.0" prefWidth="85.0" text="1 Гб" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="153.0" />
+               <Label layoutX="14.0" layoutY="186.0" text="Использовано: " textFill="#ffffffaa" AnchorPane.leftAnchor="14.0" />
+               <Label layoutX="117.0" layoutY="186.0" text="500 Мб" textFill="WHITE" underline="true" AnchorPane.rightAnchor="28.0" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="643.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="375.0" styleClass="search-bar" stylesheets="@style.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="23.0">
+            <children>
+               <TextField prefHeight="25.0" prefWidth="200.0" promptText="Найти..." styleClass="transparent" stylesheets="@style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
+               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.5">
+                  <image>
+                     <Image url="@img/glassSearch.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="412.0" layoutY="85.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="414.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="85.0">
+            <children>
+               <TableView fx:id="serverView" prefHeight="467.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                     <TableColumn prefWidth="10.0" />
+                     <TableColumn fx:id="image" prefWidth="36.0" />
+                     <TableColumn fx:id="name" prefWidth="323.0" text="Имя файла" />
+                     <TableColumn fx:id="size" prefWidth="90.0" text="Размер" />
+                     <TableColumn fx:id="date" prefWidth="133.0" text="Изменён" />
+                     <TableColumn prefWidth="10.0" />
+                  </columns>
+               </TableView>
+            </children>
+         </AnchorPane>
+         <ImageView fx:id="reloadImg" fitHeight="25.0" fitWidth="25.0" layoutX="414.0" layoutY="28.0" onMouseReleased="#reload" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@img/reloading.png" />
+            </image>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </ImageView>
+         <Label layoutX="5.0" layoutY="563.0" text="CLOUD HOOD" underline="true" AnchorPane.topAnchor="563.0">
+            <font>
+               <Font name="Agency FB Bold" size="24.0" />
+            </font>
+         </Label>
       </children>
-</AnchorPane>
-   <ImageView fx:id="reloadImg" fitHeight="25.0" fitWidth="25.0" layoutX="414.0" layoutY="28.0" onMouseReleased="#reload" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@img/reloading.png" />
-      </image>
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor>
-   </ImageView>
-   <Label layoutX="5.0" layoutY="563.0" text="CLOUD HOOD" AnchorPane.topAnchor="563.0">
-      <font>
-         <Font name="Cambria Bold" size="18.0" />
-      </font>
-   </Label>
+   </AnchorPane>
 
 </AnchorPane>

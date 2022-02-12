@@ -1,0 +1,74 @@
+.parent {
+    -fx-background-color: transparent;
+}
+
+.element-pane {
+    -fx-background-color: #4b78bb;
+}
+
+.button-auth {
+    -fx-background-color: #4b78bb;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffffff65;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 120, 187, 0.8), 10, 0, 0, 0);
+    -fx-background-radius: 10px;
+}
+
+.button-auth:hover {
+    -fx-background-color: #ffffff65;
+    -fx-text-fill: black;
+
+}
+
+.button-code {
+    -fx-background-color: transparent;
+}
+
+.button-code:hover {
+    -fx-text-fill: white;
+}
+
+.content-pane {
+    -fx-background-color: #8eaad4;
+    -fx-background-radius: 10px;
+}
+
+.content-pane-signup {
+    -fx-background-color: #4b78bb;
+    -fx-background-radius: 10px;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #7e7e7e;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+.text-field:hover {
+    -fx-border-color: black;
+}
+
+.text-field-register {
+    -fx-background-color: transparent;
+    -fx-border-color: #ffffff8a;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+.text-field-register:hover {
+    -fx-border-color: white;
+}
+
+.label-enter {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.label-register {
+    -fx-border-color: rgba(255, 255, 255, 0.562);
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-fill: rgba(255, 255, 255, 0.562);
+}
