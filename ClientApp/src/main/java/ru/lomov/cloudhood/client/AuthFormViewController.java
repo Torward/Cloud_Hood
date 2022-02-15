@@ -18,11 +18,19 @@ import java.util.ResourceBundle;
 
 public class AuthFormViewController implements Initializable {
     @FXML
-    private PasswordField passwordFieldRe;
+    private TextField loginRegField;
     @FXML
-    private TextField nicknameField;
+    private PasswordField passwordRegField;
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordRegFieldRe;
+    @FXML
+    private TextField nicknameRegField;
+    @FXML
+    private Button signUpBTN;
+    @FXML
+    private PasswordField passwordLoginField;
+    @FXML
+    private TextField nicknameLoginField;
     @FXML
     private Button signInBTN;
     @FXML
@@ -43,11 +51,15 @@ public class AuthFormViewController implements Initializable {
         System.out.println("Итерация play();");
     }
 
+    
+    /*
+     * Анимация форм---------------------------------------------------------------------------------------------------------------------------
+     * */
     public void openSignInForm() {
-       TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1),  contentPane);
-       translateTransition.setToX( contentPane.getLayoutX() * 17.5);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), contentPane);
+        translateTransition.setToX(contentPane.getLayoutX() * 17.5);
         translateTransition.play();
-        translateTransition.setOnFinished((e) ->{
+        translateTransition.setOnFinished((e) -> {
             try {
                 contentPane.getChildren().removeAll();
                 fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ru/lomov/cloudhood/client/signin_form_view.fxml")));
@@ -60,10 +72,10 @@ public class AuthFormViewController implements Initializable {
     }
 
     public void openSignUpForm() {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1),  contentPane);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), contentPane);
         translateTransition.setToX(0);
         translateTransition.play();
-        translateTransition.setOnFinished((e) ->{
+        translateTransition.setOnFinished((e) -> {
             try {
                 contentPane.getChildren().removeAll();
                 fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ru/lomov/cloudhood/client/signup_form_view.fxml")));

@@ -3,12 +3,12 @@ package ru.lomov.cloudhood.server;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.*;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
     private File root = new File("ServerApp/serverFiles");
 
@@ -48,36 +49,41 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
         System.out.println("Получено имя файла " + fileReseivedName);
         Path getFile = path.resolve(fileReseivedName);
         File file = getFile.toFile();
+//
+//        FileRegion region = new DefaultFileRegion(
+//                new FileInputStream(file).getChannel(), 0, Files.size(getFile));
+        try(BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
 
-        FileRegion region = new DefaultFileRegion(
-                new FileInputStream(getFile.toFile()).getChannel(), 0, Files.size(getFile));
+            buf = ByteBufAllocator.DEFAULT.directBuffer(1);
+            buf.writeByte((byte) 16);
+            ctx.write(buf);
+            System.out.println("Отправлен сигнальный байт: " + 16);
 
-        buf = ByteBufAllocator.DEFAULT.directBuffer(1);
-        buf.writeByte((byte) 16);
-        ctx.write(buf);
-        System.out.println("Отправлен сигнальный байт: " + 16);
+            buf = ByteBufAllocator.DEFAULT.directBuffer(4);
+            buf.writeInt(file.getName().length());
+            ctx.write(buf);
+            System.out.println("Отправлена длинна имени: " + file.getName().length());
 
-        buf = ByteBufAllocator.DEFAULT.directBuffer(4);
-        buf.writeInt(file.getName().length());
-        ctx.write(buf);
-        System.out.println("Отправлена длинна имени: " + file.getName().length());
+            byte[] filenameBytes = file.getName().getBytes(StandardCharsets.UTF_8);
+            buf = ByteBufAllocator.DEFAULT.directBuffer(filenameBytes.length);
+            buf.writeBytes(filenameBytes);
+            ctx.write(buf);
+            System.out.println("Отправлено имя файла: " + file.getName());
 
-        byte[] filenameBytes = file.getName().getBytes(StandardCharsets.UTF_8);
-        buf = ByteBufAllocator.DEFAULT.directBuffer(filenameBytes.length);
-        buf.writeBytes(filenameBytes);
-        ctx.write(buf);
-        System.out.println("Отправлено имя файла: " + file.getName());
+            buf = ByteBufAllocator.DEFAULT.directBuffer(8);
+            buf.writeLong(file.length());
+            ctx.write(buf);
+            System.out.println("Отправлен длинна файла: " + file.length());
 
-        buf = ByteBufAllocator.DEFAULT.directBuffer(8);
-        buf.writeLong(file.length());
-        ctx.write(buf);
-        System.out.println("Отправлен длинна файла: " + file.length());
+            byte[]fileBytes = in.readAllBytes();
+            buf = ByteBufAllocator.DEFAULT.directBuffer();
+            buf.writeBytes(fileBytes);
+            ctx.write(buf);
 
-        ctx.write(region);
-        ctx.flush();
-
-        System.out.println("Файл отправлен.");
-        buf.release();
+            ctx.flush();
+            System.out.println("Файл отправлен.");
+            buf.release();
+        }
     }
 
     private void refreshClientList(ChannelHandlerContext ctx, File rootDirFiles, List<File> filesList) {
@@ -127,7 +133,7 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
             ctx.write(buf);
             System.out.println("Отправлено имя файла: " + eachFile.getName());
 
-            buf = ByteBufAllocator.DEFAULT.directBuffer(8);
+            buf = ByteBufAllocator.DEFAULT.directBuffer(16);
             buf.writeLong(eachFile.length());
             ctx.write(buf);
             System.out.println("Отправленна длина файла: " + eachFile.length());

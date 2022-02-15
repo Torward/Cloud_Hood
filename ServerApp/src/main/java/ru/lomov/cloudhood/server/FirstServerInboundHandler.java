@@ -3,26 +3,26 @@ package ru.lomov.cloudhood.server;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+@Slf4j
 public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
     private Signal signalType = Signal.VOID;
     private int limiter = -1;
     private int condition = -1;
     private int iter = 0;
     private String fileName;
-
     private final Path rootDir = Paths.get("ServerApp/serverFiles");
 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Соединение установлено..");
+        log.debug("Соединение сервера с клиентом установлено..");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
             byte command = buffer.readByte();
             signalType = Signal.getSignalByte(command);
             limiter = 4;
-            System.out.println("Тип сообщения определён как: " + signalType);
+            log.debug("Тип сообщения определён как: " + signalType);
             condition = 0;
             iter++;
         }
@@ -45,8 +45,19 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
         if(signalType.equals(Signal.SEND_FILE_LIST)){
             ctx.channel().writeAndFlush(Signal.SEND_FILE_LIST);
         }
+        if (signalType.equals(Signal.DELETE_FILE)){
+            deleteFile(buffer);
+        }
         condition = -1;
         iter = 0;
+    }
+
+    private void deleteFile(ByteBuf buffer) {
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
     }
 
     @Override
@@ -70,6 +81,7 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
     public void writeToCloud(ByteBuf buf) {
         int localCondition = condition;
         int localLimiter = -1;
+        int fileNameSize = 0;
 
         if (localCondition == 0) {
             if (buf.readableBytes() < localLimiter) {
@@ -77,29 +89,28 @@ public class FirstServerInboundHandler extends ChannelInboundHandlerAdapter {
                 condition = -1;
                 return;
             }
-            localLimiter = buf.readInt();
-            System.out.println("Длинна имени: " + localLimiter);
+            fileNameSize = buf.readInt();
+            System.out.println("Длинна имени: " + fileNameSize);
             localCondition = 1;
             iter++;
         }
 
         if (localCondition == 1) {
-            if (buf.readableBytes() < localLimiter) {
+            if (buf.readableBytes()  == -1) {
                 System.out.println("Сообщение не прошло верификацию. " + iter);
                 condition = -1;
                 return;
             }
-            byte[] nameInBytes = new byte[localLimiter];
+            byte[] nameInBytes = new byte[fileNameSize];
             buf.readBytes(nameInBytes);
             fileName = new String(nameInBytes);
             System.out.println("Получено имя файла: " + fileName);
             localCondition = 2;
             iter++;
-            localLimiter = -1;
         }
 
         if (localCondition == 2) {
-            if (buf.readableBytes() < localLimiter) {
+            if (buf.readableBytes() ==-1) {
                 System.out.println("Сообщение не прошло верификацию. " + iter);
                 condition = -1;
                 return;

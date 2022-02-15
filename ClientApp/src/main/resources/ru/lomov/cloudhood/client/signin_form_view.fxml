@@ -11,8 +11,8 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="nicknameField" layoutX="236.0" layoutY="202.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" AnchorPane.rightAnchor="21.0" />
-      <PasswordField fx:id="passwordField" layoutX="236.0" layoutY="258.0" prefHeight="23.0" prefWidth="223.0" AnchorPane.rightAnchor="21.0" />
+      <TextField fx:id="nicknameLoginField" layoutX="236.0" layoutY="202.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" AnchorPane.rightAnchor="21.0" />
+      <PasswordField fx:id="passwordLoginField" layoutX="236.0" layoutY="258.0" prefHeight="23.0" prefWidth="223.0" AnchorPane.rightAnchor="21.0" />
       <Button fx:id="signInBTN" layoutX="407.0" layoutY="309.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="100.0" styleClass="button-auth" text="ВОЙТИ" AnchorPane.rightAnchor="21.0" />
       <Label layoutX="159.0" layoutY="210.0" text="псевдоним" AnchorPane.rightAnchor="244.0">
          <font>

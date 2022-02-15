@@ -71,15 +71,14 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         nickname.setUnderline(true);
         nickname.setText("Егорыч");
         network = new ClientNetworkNetty();
-        //      socket = network.getSocket();
         name.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("name"));
         size.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("size"));
         date.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("date"));
-
-        reload();
+       initReload();
     }
 
     // Командные методы-----------------------------------------------
@@ -150,6 +149,13 @@ public class MainController implements Initializable {
         network.getFile(fileName);
     }
 
+    public void initReload() {
+        network.initRefreshFileList();
+        list = FXCollections.observableArrayList(network.getList());
+        System.out.println("Element in collection: " + list.size());
+        serverView.setItems(list);
+        serverView.comparatorProperty();
+    }
     public void reload() {
         network.refreshFileList();
         list = FXCollections.observableArrayList(network.getList());
@@ -157,6 +163,7 @@ public class MainController implements Initializable {
         serverView.setItems(list);
         serverView.comparatorProperty();
     }
+
     //--------------------------------------------------------------------------
     //graphics
 

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@Slf4j
 public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
 
     private static ObservableList<FileInfo> list = FXCollections.observableArrayList();
@@ -27,7 +29,7 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Соединение с сервером установленно..");
+        log.debug("Соединение с сервером установленно..");
     }
 
 
@@ -36,11 +38,11 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buffer = (ByteBuf) msg;
         byte command = buffer.readByte();
         Signal signalType = Signal.getSignalByte(command);
-        System.out.println("Тип сообщения определён как: " + signalType);
+        log.debug("Тип сообщения определён как: " + signalType);
         if (signalType.equals(Signal.GET_FILE_LIST)) {
             refreshFileList(buffer);
         }
-        if (signalType.equals(Signal.GET_FILE_TO_CLIENT)){
+        if (signalType.equals(Signal.GET_FILE_TO_CLIENT)) {
             download(buffer);
         }
 
@@ -55,24 +57,24 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
 
         if (localCondition == 0) {
             if (buf.readableBytes() < localLimiter) {
-                System.out.println("Сообщение не прошло верификацию. " + iter);
+                log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
             localLimiter = buf.readInt();
-            System.out.println("Длинна имени: " + localLimiter);
+            log.debug("Длинна имени: " + localLimiter);
             localCondition = 1;
             iter++;
         }
 
         if (localCondition == 1) {
             if (buf.readableBytes() < localLimiter) {
-                System.out.println("Сообщение не прошло верификацию. " + iter);
+                log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
             byte[] nameInBytes = new byte[localLimiter];
             buf.readBytes(nameInBytes);
             fileName = new String(nameInBytes);
-            System.out.println("Получено имя файла: " + fileName);
+            log.debug("Получено имя файла: " + fileName);
             localCondition = 2;
             iter++;
             localLimiter = -1;
@@ -80,25 +82,25 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
 
         if (localCondition == 2) {
             if (buf.readableBytes() < localLimiter) {
-                System.out.println("Сообщение не прошло верификацию. " + iter);
+                log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
             longLimiter = buf.readLong();
-            System.out.println("Получина длинна файла: " + longLimiter);
+            log.debug("Получина длинна файла: " + longLimiter);
             localCondition = 3;
             iter++;
         }
 
         if (localCondition == 3) {
-            if (buf.readableBytes() < localLimiter) {
-                System.out.println("Сообщение не прошло верификацию. " + iter);
+            if (buf.readableBytes() < longLimiter) {
+                log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
             try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(rootDir + "/" + fileName))) {
-                while (buf.readableBytes() > longLimiter){
+                while (buf.readableBytes() > 0) {
                     out.write(buf.readByte());
                 }
-            //    System.out.println("Файл записан.");
+                log.debug("Файл записан.");
             } catch (IOException e) {
                 e.printStackTrace();
                 buf.release();
@@ -118,33 +120,33 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
         }
 
         fileCount = buffer.readInt();
-        System.out.println("Получено количество файлов: " + fileCount);
+        log.debug("Получено количество файлов: " + fileCount);
 
         for (int i = 0; i < fileCount; i++) {
             int fileNameLength = buffer.readInt();
-            System.out.println("Получена длинна имени файла: " + fileNameLength);
+            log.debug("Получена длинна имени файла: " + fileNameLength);
             String fileNameOfList = null;
 
 
             byte[] nameInBytes = new byte[fileNameLength];
             buffer.readBytes(nameInBytes);
             fileNameOfList = new String(nameInBytes);
-            System.out.println("Получено имя файла: " + fileNameOfList);
+            log.debug("Получено имя файла: " + fileNameOfList);
 
             long fileSizeInByte;
 
             fileSizeInByte = buffer.readLong();
-            System.out.println("Получена длина файла в байтах: " + fileSizeInByte);
+            log.debug("Получена длина файла в байтах: " + fileSizeInByte);
 
             String fileDateOfList = null;
 
             int modifiedDateLength = buffer.readInt(); // лечить здесь!!!
-            System.out.println("Получена длина даты изменения: " + modifiedDateLength);
+            log.debug("Получена длина даты изменения: " + modifiedDateLength);
 
             byte[] modifiedDateInBytes = new byte[modifiedDateLength];
             buffer.readBytes(modifiedDateInBytes);
             fileDateOfList = new String(modifiedDateInBytes);
-            System.out.println("Получена дата изменения: " + fileDateOfList);
+            log.debug("Получена дата изменения: " + fileDateOfList);
             if (fileSizeInByte == 0) {
                 fileSizeOfList = "папка";
             } else if (fileSizeInByte < (1024)) {

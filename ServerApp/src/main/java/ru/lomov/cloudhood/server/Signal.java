@@ -1,6 +1,7 @@
 package ru.lomov.cloudhood.server;
 
 public enum Signal {
+    AUTH((byte)21),
     SEND_FILE_TO_CLIENT((byte) 16),
     WRITE_FILE_TO_CLOUD((byte) 36),
     SEND_FILE_LIST((byte) 52),
@@ -15,6 +16,9 @@ public enum Signal {
     }
 
     static Signal getSignalByte(byte command) {
+        if (command == AUTH.signalByte){
+            return AUTH;
+        }
         if (command == SEND_FILE_TO_CLIENT.signalByte) {
             return SEND_FILE_TO_CLIENT;
         }

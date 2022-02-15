@@ -12,25 +12,25 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="264.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" />
-      <PasswordField fx:id="passwordFieldRe" layoutX="246.0" layoutY="290.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" AnchorPane.rightAnchor="11.0" />
-      <TextField fx:id="nicknameField" layoutX="246.0" layoutY="237.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" />
-      <Label layoutX="167.0" layoutY="245.0" text="псевдоним" AnchorPane.rightAnchor="236.0">
+      <PasswordField fx:id="passwordRegField" layoutX="246.0" layoutY="262.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" />
+      <PasswordField fx:id="passwordRegFieldRe" layoutX="246.0" layoutY="287.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" AnchorPane.rightAnchor="11.0" />
+      <TextField fx:id="loginRegField" layoutX="246.0" layoutY="237.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" />
+      <Label layoutX="167.0" layoutY="222.0" text="псевдоним" AnchorPane.rightAnchor="236.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="194.0" layoutY="273.0" text="пароль" AnchorPane.rightAnchor="236.0">
+      <Label layoutX="195.0" layoutY="271.0" text="пароль" AnchorPane.rightAnchor="236.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="118.0" layoutY="298.0" text="повторить пароль" AnchorPane.rightAnchor="236.0">
+      <Label layoutX="118.0" layoutY="296.0" text="повторить пароль" AnchorPane.rightAnchor="236.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="signInFormBTN" layoutX="305.0" layoutY="332.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openSignInForm" prefHeight="32.0" prefWidth="161.0" styleClass="button-auth" text="ЗАРЕГИСТРИРОВАТЬСЯ" AnchorPane.rightAnchor="11.0">
+      <Button fx:id="signUpBTN" layoutX="305.0" layoutY="332.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="161.0" styleClass="button-auth" text="ЗАРЕГИСТРИРОВАТЬСЯ" AnchorPane.rightAnchor="11.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -38,6 +38,12 @@
       <Label layoutX="281.0" layoutY="110.0" prefHeight="68.0" prefWidth="175.0" text="Регистрация не требует от Вас передачи личных данных. " wrapText="true" AnchorPane.rightAnchor="11.0">
          <font>
             <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nicknameRegField" layoutX="245.0" layoutY="212.0" prefHeight="23.0" prefWidth="223.0" styleClass="text-field" AnchorPane.rightAnchor="11.0" />
+      <Label layoutX="167.0" layoutY="245.0" text="логин" AnchorPane.rightAnchor="236.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
    </children>

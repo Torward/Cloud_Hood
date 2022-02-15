@@ -76,13 +76,15 @@ public class ClientNetworkNetty {
     }
 
     public void refreshFileList() {
+        channel.writeAndFlush(Signal.GET_FILE_LIST);
+    }
+    public void initRefreshFileList(){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         channel.writeAndFlush(Signal.GET_FILE_LIST);
-
     }
 
     public void deleteFile(String fileName){
@@ -92,6 +94,7 @@ public class ClientNetworkNetty {
             e.printStackTrace();
         }
         channel.writeAndFlush(fileName);
+        channel.writeAndFlush(Signal.DELETE_FILE);
     }
 
     public ObservableList<FileInfo> getList() {
