@@ -26,6 +26,7 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
     private String fileName;
     private static ChannelHandlerContext ctx;
     private final Path rootDir = Paths.get("ClientApp/clientFiles");
+    private Signal signalType = Signal.VOID;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -36,15 +37,21 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buffer = (ByteBuf) msg;
-        byte command = buffer.readByte();
-        Signal signalType = Signal.getSignalByte(command);
-        log.debug("Тип сообщения определён как: " + signalType);
-        if (signalType.equals(Signal.GET_FILE_LIST)) {
-            refreshFileList(buffer);
-        }
-        if (signalType.equals(Signal.GET_FILE_TO_CLIENT)) {
-            download(buffer);
-        }
+       // while (buffer.readableBytes()>0) {
+            if(signalType.equals(Signal.VOID)) {
+                byte command = buffer.readByte();
+                signalType = Signal.getSignalByte(command);
+                log.debug("Тип сообщения определён как: " + signalType);
+
+            }
+            if (signalType.equals(Signal.GET_FILE_LIST)) {
+                refreshFileList(buffer);
+            }
+            if (signalType.equals(Signal.GET_FILE_TO_CLIENT)) {
+                download(buffer);
+            }
+
+       // }
 
 
     }
@@ -53,7 +60,8 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
         int localCondition = 0;
         int localLimiter = -1;
         int iter = 0;
-        long longLimiter = 0;
+        long fileSize = 0;
+        long receivedFileBytes = 0;
 
         if (localCondition == 0) {
             if (buf.readableBytes() < localLimiter) {
@@ -85,25 +93,31 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
                 log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
-            longLimiter = buf.readLong();
-            log.debug("Получина длинна файла: " + longLimiter);
+            fileSize = buf.readLong();
+            log.debug("Получина длинна файла: " + fileSize);
             localCondition = 3;
             iter++;
         }
 
-        if (localCondition == 3) {
-            if (buf.readableBytes() < longLimiter) {
+        if (localCondition     == 3) {
+            if (buf.readableBytes() < fileSize) {
                 log.debug("Сообщение не прошло верификацию. " + iter);
                 return;
             }
             try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(rootDir + "/" + fileName))) {
                 while (buf.readableBytes() > 0) {
                     out.write(buf.readByte());
+                    receivedFileBytes++;
+                    if (fileSize == receivedFileBytes){
+                        log.debug("Файл записан.");
+                        signalType = Signal.VOID;
+                        break;
+                    }
+
                 }
-                log.debug("Файл записан.");
+
             } catch (IOException e) {
                 e.printStackTrace();
-                buf.release();
             }
         }
         if (buf.readableBytes() == 0) {
@@ -111,7 +125,7 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
-    public static ObservableList<FileInfo> refreshFileList(ByteBuf buffer) {
+    public ObservableList<FileInfo> refreshFileList(ByteBuf buffer) {
 
         int fileCount;
         String fileSizeOfList = null;
@@ -166,10 +180,12 @@ public class FirstClientInboundHandler extends ChannelInboundHandlerAdapter {
         if (buffer.readableBytes() == 0) {
             buffer.release();
         }
+        signalType = Signal.VOID;
         return list;
     }
 
-    public static ObservableList<FileInfo> getList() {
+    public ObservableList<FileInfo> getList() {
+        signalType = Signal.VOID;
         return list;
     }
 

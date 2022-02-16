@@ -103,7 +103,8 @@ public class ClientNetworkNetty {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        list = FirstClientInboundHandler.getList();
+        FirstClientInboundHandler firstClientInboundHandler = new FirstClientInboundHandler();
+        list = firstClientInboundHandler.getList();
         return list;
     }
     //    void receiveMsg(String fileReseivedName, TextArea textArea) throws IOException {

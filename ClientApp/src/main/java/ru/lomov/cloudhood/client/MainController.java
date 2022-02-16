@@ -79,6 +79,7 @@ public class MainController implements Initializable {
         size.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("size"));
         date.setCellValueFactory(new PropertyValueFactory<FileInfo, String>("date"));
        initReload();
+        System.out.println("Проверка итерации");
     }
 
     // Командные методы-----------------------------------------------
@@ -154,7 +155,7 @@ public class MainController implements Initializable {
         list = FXCollections.observableArrayList(network.getList());
         System.out.println("Element in collection: " + list.size());
         serverView.setItems(list);
-        serverView.comparatorProperty();
+//        serverView.comparatorProperty();
     }
     public void reload() {
         network.refreshFileList();

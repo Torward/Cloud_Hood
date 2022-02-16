@@ -29,7 +29,7 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        System.out.println(msg);
+       log.debug(msg.toString());
         if (msg instanceof Signal) {
             if (msg.equals(Signal.SEND_FILE_LIST)) {
                 refreshClientList(ctx, root, filesList);
@@ -73,7 +73,7 @@ public class ServerOutBoundHandler extends ChannelOutboundHandlerAdapter {
             buf = ByteBufAllocator.DEFAULT.directBuffer(8);
             buf.writeLong(file.length());
             ctx.write(buf);
-            System.out.println("Отправлен длинна файла: " + file.length());
+            System.out.println("Отправлена длинна файла: " + file.length());
 
             byte[]fileBytes = in.readAllBytes();
             buf = ByteBufAllocator.DEFAULT.directBuffer();
